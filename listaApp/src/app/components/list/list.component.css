@@ -1,0 +1,14 @@
+main{
+    width: 100%;
+    margin-top: 1rem;
+    text-align: center;
+}
+.formLista{
+    text-align: left;
+    margin-left: 1rem;
+}
+
+.lista{
+    width: 95%;
+    margin-left: 1rem;
+}

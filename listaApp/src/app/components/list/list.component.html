@@ -1,1 +1,28 @@
-<p>list works!</p>
+<main>
+    <div class="formLista">
+        <form >
+            <mat-form-field>
+                <input matInput type="text" placeholder="Nombre de la Lista">
+            </mat-form-field>
+            <button mat-raised-button matSuffix mat-icon-button (click)="value=''">
+                <mat-icon>save</mat-icon>
+            </button>
+        </form>
+    </div>
+    <div class="lista">
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header >
+                    <mat-panel-title>
+                        Lista 1 nombre
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-product></app-product>
+                <app-product></app-product>
+                
+            </mat-expansion-panel>
+
+        </mat-accordion>
+    </div>
+    
+</main>
