@@ -1,9 +1,36 @@
-<mat-card>
+<mat-card class="productos">
     <mat-card-header>
-        <div>OTRO</div>
-        <div class="precio">precio</div>
+        <div class="formulario">
+            <form #productForm="ngForm" (ngSubmit)="addProduct(productForm)">
+                <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="productService.selectedProduct._id">
+                <input type="hidden" name="listId" name="listId" #listId="ngModel" [(ngModel)]="productService.selectedProduct.listId"/>
+                <mat-form-field>
+                    <input matInput type="text" placeholder="Producto" name="name" #name="ngModel" [(ngModel)]="productService.selectedProduct.name">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput type="text" placeholder="Precio" name="price" #price="ngModel" [(ngModel)]="productService.selectedProduct.price">
+                </mat-form-field>
+                <button mat-raised-button matSuffix mat-icon-button >
+                    <mat-icon>save</mat-icon>
+                </button>
+            </form>
+        </div>
+        
     </mat-card-header>
-    <mat-card-content>
-        <mat-slide-toggle>¡Cogido!</mat-slide-toggle>
+    <mat-card-content *ngFor="let product of productos">
+        <mat-card [style.background-color]="setColor(product.check)">
+            
+            {{product.name}} {{product.price}} € 
+            <mat-slide-toggle [(ngModel)]="product.check" [checked]="product.check" ></mat-slide-toggle>
+            <div class="botones">
+                <button mat-button matSuffix mat-icon-button (click)="editProduct(product)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-button matSuffix mat-icon-button (click)="deleteProduct(product._id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </mat-card>
+        
     </mat-card-content>
 </mat-card>

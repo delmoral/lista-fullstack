@@ -17,6 +17,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card'; 
 import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
+import {MatSnackBarModule} from '@angular/material/snack-bar'; 
 
 import { FormsModule } from '@angular/forms';
 
@@ -38,6 +39,7 @@ import { FormsModule } from '@angular/forms';
     MatExpansionModule,
     MatCardModule,
     MatSlideToggleModule,
+    MatSnackBarModule,
     HttpClientModule,
     FormsModule
   ],

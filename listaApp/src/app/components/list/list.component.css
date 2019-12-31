@@ -12,3 +12,11 @@ main{
     width: 95%;
     margin-left: 1rem;
 }
+
+mat-panel-title{
+    align-items: center;
+}
+ mat-expansion-panel{
+     
+    background-color: #c8e6c9;
+ }

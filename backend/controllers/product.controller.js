@@ -9,7 +9,8 @@ productCtrl.getProducts = async (req, res) => {
 productCtrl.createProduct = async (req, res) =>{
     const product = new productModel({
         name: req.body.name,
-        price: req.body.price
+        price: req.body.price,
+        listId: req.body.listId
     });
     console.log(product);
     await product.save();
@@ -27,7 +28,8 @@ productCtrl.editProduct = async (req, res) =>{
     const { id } = req.params;
     const product = {
         name: req.body.name,
-        price: req.body.price
+        price: req.body.price,
+        listId: req.body.listId
     }
 
     await productModel.findByIdAndUpdate(id, {$set: product, new:true});
@@ -38,4 +40,5 @@ productCtrl.deleteProduct = async (req, res) =>{
     await productModel.findByIdAndDelete(req.params.id);
     res.json({status: 'ok'})
 }
+
 module.exports = productCtrl;

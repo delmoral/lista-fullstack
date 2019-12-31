@@ -1,8 +1,21 @@
 mat-card{
-    margin-bottom: 1rem;
+    
+    text-align: center;
 }
 
-.precio{
-    margin: 1rem;
+.formulario{
+    align-items: center;
+    
+}
+
+.productos{
+    background-color: #aed581;
+}
+
+mat-slide-toggle{
+    margin-left: 1rem;
+}
+
+.botones{
     text-align: right;
 }

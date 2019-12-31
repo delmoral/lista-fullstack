@@ -10,7 +10,7 @@ export class ProductService {
   readonly URL_API = 'http://localhost:3000/api/products'
 
   selectedProduct: Product;
-  productsList: Product[];
+  allProduct: Product[];
 
   constructor(private http: HttpClient) {
     this.selectedProduct = new Product();
