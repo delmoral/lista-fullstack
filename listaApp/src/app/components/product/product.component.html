@@ -17,9 +17,10 @@
         </div>
         
     </mat-card-header>
-    <mat-card-content *ngFor="let product of productos">
+    
+    <mat-card-content *ngFor="let product of productos" >
+        
         <mat-card [style.background-color]="setColor(product.check)">
-            
             {{product.name}} {{product.price}} € 
             <mat-slide-toggle [(ngModel)]="product.check" [checked]="product.check" ></mat-slide-toggle>
             <div class="botones">
@@ -31,6 +32,7 @@
                 </button>
             </div>
         </mat-card>
-        
+
     </mat-card-content>
+
 </mat-card>

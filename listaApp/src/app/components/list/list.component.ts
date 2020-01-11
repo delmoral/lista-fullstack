@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ListService } from '../../services/list.service';
+import { ProductService } from '../../services/product.service';
+
 import { List } from 'src/app/models/list';
 import { NgForm } from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar'; 
@@ -10,7 +12,7 @@ import { ProductComponent } from '../product/product.component';
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css'],
-  providers: [ListService]
+  providers: [ListService, ProductService]
 })
 export class ListComponent implements OnInit {
 
@@ -19,7 +21,7 @@ export class ListComponent implements OnInit {
 
   @ViewChild(ProductComponent, null) productosLista;
 
-  constructor(private listService: ListService, private _snachBar: MatSnackBar) { }
+  constructor(private listService: ListService, private productService: ProductService, private _snachBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getLists();
@@ -27,17 +29,19 @@ export class ListComponent implements OnInit {
 
   getLists(){
     this.listService.getLists().subscribe(res =>{
-      //console.log(res);
-      
       this.listas = res as List[];
-      //this.productosLista.productos
-      //this.productos = this.listas.products as Product[];
+      for(let lista of this.listas){
+        lista.products = this.productService.getProductsById(lista._id);
+      }
     })
   }
 
   addList(form?: NgForm){
     console.log(form.value);
+    var lista: List = form.value;
+    console.log('FORM: '+form.value.name);
     
+    // Existe la lista
     if(form.value._id){
       form.value.products = this.productosLista.productos;
       this.listService.putList(form.value).subscribe(res =>{

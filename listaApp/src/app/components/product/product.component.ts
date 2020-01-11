@@ -20,11 +20,17 @@ export class ProductComponent implements OnInit {
   constructor(private productService: ProductService, private _snachBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.getProducts();
+    this.getProductsById();
   }
 
   getProducts(){
     this.productService.getProducts().subscribe(res =>{
+      this.productos = res as Product[];
+    })
+  }
+
+  getProductsById(){
+    this.productService.getProductsById(this.listId).subscribe(res =>{
       this.productos = res as Product[];
     })
   }
@@ -36,7 +42,7 @@ console.log(form.value);;
     if(form.value._id){      
       this.productService.putProduct(form.value).subscribe(res =>{
         this.resetForm(form);
-        this.getProducts();
+        this.getProductsById();
         this._snachBar.open('Producto actualizado', null, {
           duration: 3000
         })
@@ -44,7 +50,7 @@ console.log(form.value);;
     } else{
       this.productService.postProduct(form.value).subscribe(res =>{
         this.resetForm(form);
-        this.getProducts();
+        this.getProductsById();
         this._snachBar.open('Producto creado', null, {
           duration: 3000
         })
@@ -65,7 +71,7 @@ console.log(form.value);;
   deleteProduct(_id: string){
     if(confirm('¿Borrar?')){
       this.productService.deleteProduct(_id).subscribe(res =>{
-        this.getProducts();
+        this.getProductsById();
         this._snachBar.open('Producto eliminado', null, {
           duration: 3000
         })

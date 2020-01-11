@@ -28,11 +28,13 @@
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>
-                    
                 </mat-expansion-panel-header>
+                
+                <app-product [listId]="list._id"></app-product>
+                
+
 
                 
-                <app-product  [listId]="list._id"></app-product>
                 
             </mat-expansion-panel>
 
@@ -43,4 +45,5 @@
         <p>¡Añade una nueva lista!</p>
     </ng-template>
     
+
 </main>

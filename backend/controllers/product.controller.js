@@ -24,6 +24,14 @@ productCtrl.getProduct = async (req, res) =>{
     res.json(product);
 }
 
+productCtrl.getProductById = async (req, res) =>{
+    const products = await productModel.find({listId: req.params.id},(err, res) =>{
+        this.products = res;
+        console.log(res);
+    })
+    res.json(products);
+}
+
 productCtrl.editProduct = async (req, res) =>{
     const { id } = req.params;
     const product = {
