@@ -20,6 +20,10 @@ export class ListService {
     return this.http.get(this.URL_API);
   }
 
+  getListByKey(key: string){
+    return this.http.get(this.URL_API + `/load/${key}`);
+  } 
+
   postList(list: List){
     return this.http.post(this.URL_API, list);
   }

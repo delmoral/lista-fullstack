@@ -3,24 +3,36 @@ const productModel = require('../models/product');
 const listCtrl = {};
 
 listCtrl.getLists = async (req, res) => {
-    await listModel.find({}, (err, lists) =>{
-        productModel.populate(lists, {path:"products"}, (err, lists)=>{
+    const lists = await listModel.find({}); //, (err, lists) =>{
+        //productModel.populate(lists, {path:"products"}, (err, lists)=>{
+            
             res.json(lists);
-        })
-    });
+        //})
+    //});
 }
 
 listCtrl.createList = async (req, res) =>{
     // sin el _id
     const list = new listModel({
         name: req.body.name,
-        products: req.body.products
+        products: req.body.products,
+        key: req.body.key
     });
     console.log(list);
     await list.save();
     res.json({
         status: 'ok'
     });
+}
+
+listCtrl.getListByKey = async (req, res)=>{
+    const lists = await listModel.find({key: req.params.key}, (err, res) =>{
+        this.lists = res;
+        console.log(res);
+    });
+    console.log(lists);
+    
+    res.json(lists);
 }
 
 listCtrl.getList = async (req, res) =>{

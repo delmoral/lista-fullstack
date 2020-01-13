@@ -19,12 +19,15 @@ export class ListComponent implements OnInit {
   listas = [];
   productos = [];
 
+  keyGuardar;
+  keyCargar;
+
   @ViewChild(ProductComponent, null) productosLista;
 
   constructor(private listService: ListService, private productService: ProductService, private _snachBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.getLists();
+    // Borrar
   }
 
   getLists(){
@@ -33,6 +36,39 @@ export class ListComponent implements OnInit {
       for(let lista of this.listas){
         lista.products = this.productService.getProductsById(lista._id);
       }
+    })
+    console.log(this.listas);
+    
+  }
+
+  saveList(form?: NgForm){
+    // comprobar si hay listas.
+    if(this.listas.length < 1){
+      this._snachBar.open('No hay listas para guardar', null, {
+        duration: 3000
+      })
+      return; // Nada que hacer si no hay listas    
+    }
+    // Asignamos key a cada lista.
+    for(let lista of this.listas){
+        lista.key = this.keyGuardar;
+        this.listService.putList(lista);
+    }
+    console.log(this.listas);
+    
+    this.resetForm(form);
+  }
+
+  getListByKey(key: string){
+    this.listService.getListByKey(key).subscribe(res =>{
+        this.listas = res as List[];
+        for(let lista of this.listas){
+          lista.products = this.productService.getProductsById(lista._id);
+        }
+        console.log("key: "+key);
+        
+        console.log(this.listas);
+        
     })
   }
 
@@ -44,6 +80,7 @@ export class ListComponent implements OnInit {
     // Existe la lista
     if(form.value._id){
       form.value.products = this.productosLista.productos;
+      form.value.key = "";
       this.listService.putList(form.value).subscribe(res =>{
         console.log(form.value);
         this.resetForm(form);
