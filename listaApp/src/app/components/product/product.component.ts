@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ProductComponent implements OnInit {
 
   productos = [];
+  idProductos = [];
   checked = false;
 
   @Input() listId: string;
@@ -32,6 +33,9 @@ export class ProductComponent implements OnInit {
   getProductsById(){
     this.productService.getProductsById(this.listId).subscribe(res =>{
       this.productos = res as Product[];
+      for(var i=0; i< this.productos.length; i++){
+        this.idProductos[i] = this.productos[i]._id;
+      }
     })
   }
 

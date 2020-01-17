@@ -7,13 +7,13 @@
                 <input matInput type="text" placeholder="Guardar Listas" name="keyGuardar" [(ngModel)]="keyGuardar">
             </mat-form-field>
             <button mat-raised-button matSuffix mat-icon-button (click)="saveList(keyForm)">
-                <mat-icon>cloud_download</mat-icon>
+                <mat-icon>cloud_upload</mat-icon>
             </button>
             <mat-form-field>
                 <input matInput type="text" placeholder="Cargar Listas" name="keyCargar" [(ngModel)]="keyCargar"> 
             </mat-form-field>
             <button mat-raised-button matSuffix mat-icon-button (click)="getListByKey(keyCargar)">
-                <mat-icon>cloud_upload</mat-icon>
+                <mat-icon>cloud_download</mat-icon>
             </button>
         </form>
     </div>
@@ -22,6 +22,7 @@
         <form #listForm="ngForm" (ngSubmit)="addList(listForm)">
             <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="listService.selectedList._id">
             <input type="hidden" name="key" #key="ngModel" [(ngModel)]="listService.selectedList.key">
+            <input type="hidden" name="products" #products="ngModel" [(ngModel)]="listService.selectedList.products">
             <mat-form-field>
                 <input matInput type="text" placeholder="Nombre de la Lista" name="name" #name="ngModel" [(ngModel)]="listService.selectedList.name">
             </mat-form-field>

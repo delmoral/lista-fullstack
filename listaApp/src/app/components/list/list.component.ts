@@ -36,8 +36,8 @@ export class ListComponent implements OnInit {
       for(let lista of this.listas){
         lista.products = this.productService.getProductsById(lista._id);
       }
+      console.log(this.listas);
     })
-    console.log(this.listas);
     
   }
 
@@ -52,9 +52,17 @@ export class ListComponent implements OnInit {
     // Asignamos key a cada lista.
     for(let lista of this.listas){
         lista.key = this.keyGuardar;
-        this.listService.putList(lista);
+        lista as List;
+        console.log(lista);
+        
+        this.listService.putList(lista).subscribe(res =>{
+          this._snachBar.open('Listas guardadas', null, {
+            duration: 3000
+          })
+        });
+        
     }
-    console.log(this.listas);
+    //console.log("Guardando listas: "+this.listas );
     
     this.resetForm(form);
   }
@@ -62,27 +70,24 @@ export class ListComponent implements OnInit {
   getListByKey(key: string){
     this.listService.getListByKey(key).subscribe(res =>{
         this.listas = res as List[];
+        console.log(res);
+        
         for(let lista of this.listas){
           lista.products = this.productService.getProductsById(lista._id);
         }
-        console.log("key: "+key);
-        
-        console.log(this.listas);
-        
     })
   }
 
   addList(form?: NgForm){
-    console.log(form.value);
-    var lista: List = form.value;
-    console.log('FORM: '+form.value.name);
     
     // Existe la lista
     if(form.value._id){
-      form.value.products = this.productosLista.productos;
-      form.value.key = "";
+      form.value.products = this.productosLista.idProductos;
+      //form.value.key = "";
+      console.log(form.value.products);
+      
+            
       this.listService.putList(form.value).subscribe(res =>{
-        console.log(form.value);
         this.resetForm(form);
         this.getLists();
         this._snachBar.open('Lista actualizada', null, {

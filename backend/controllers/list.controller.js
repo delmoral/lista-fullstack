@@ -47,7 +47,8 @@ listCtrl.editList = async (req, res) =>{
     const { id } = req.params;
     const list = {
         name: req.body.name,
-        products: req.body.products
+        products: req.body.products,
+        key: req.body.key
     }
 
     await listModel.findByIdAndUpdate(id, {$set: list, new:true});
