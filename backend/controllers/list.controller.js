@@ -30,7 +30,6 @@ listCtrl.getListByKey = async (req, res)=>{
         this.lists = res;
         console.log(res);
     });
-    console.log(lists);
     
     res.json(lists);
 }

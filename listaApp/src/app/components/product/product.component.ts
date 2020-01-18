@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ProductComponent implements OnInit {
 
   productos = [];
-  idProductos = [];
+  idProductos: Array<String> = [];
   checked = false;
 
   @Input() listId: string;
@@ -30,9 +30,10 @@ export class ProductComponent implements OnInit {
     })
   }
 
-  getProductsById(){
-    this.productService.getProductsById(this.listId).subscribe(res =>{
+  async getProductsById(id?: string){
+    this.productService.getProductsById(id || this.listId).subscribe(res =>{
       this.productos = res as Product[];
+      this.idProductos = [];
       for(var i=0; i< this.productos.length; i++){
         this.idProductos[i] = this.productos[i]._id;
       }
@@ -41,7 +42,14 @@ export class ProductComponent implements OnInit {
 
   addProduct(form?: NgForm){
     form.value.listId = this.listId;
-console.log(form.value);;
+
+    if(form.value.name.length === 0){
+      this._snachBar.open('Pon algún nombre al producto nuevo', null, {duration: 3000});
+      return;
+    }
+    if(form.value.price == null){
+      form.value.price = 0;
+    }
 
     if(form.value._id){      
       this.productService.putProduct(form.value).subscribe(res =>{
@@ -60,12 +68,6 @@ console.log(form.value);;
         })
       });
     }
-    
-    /*
-    console.log(this.listId);
-    form.value.listId = this.listId;
-    console.log(form.value);
-    */
   }
 
   editProduct(product: Product){
@@ -73,14 +75,15 @@ console.log(form.value);;
   }
 
   deleteProduct(_id: string){
-    if(confirm('¿Borrar?')){
+
+    //if(confirm('¿Borrar?')){
       this.productService.deleteProduct(_id).subscribe(res =>{
         this.getProductsById();
         this._snachBar.open('Producto eliminado', null, {
           duration: 3000
         })
       })
-    }
+    //}
   }
 
   resetForm(form?: NgForm){
@@ -92,7 +95,7 @@ console.log(form.value);;
 
   setColor(estado: boolean){
     if(estado){
-      return "#311b92"
+      return "#f57f17"
     }
   }
 

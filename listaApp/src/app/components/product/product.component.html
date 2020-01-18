@@ -1,9 +1,10 @@
 <mat-card class="productos">
+    <button (click)="getProducts()">todo</button>
     <mat-card-header>
         <div class="formulario">
             <form #productForm="ngForm" (ngSubmit)="addProduct(productForm)">
                 <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="productService.selectedProduct._id">
-                <input type="hidden" name="listId" name="listId" #listId="ngModel" [(ngModel)]="productService.selectedProduct.listId"/>
+                <input type="hidden" name="listId" #listId="ngModel" [(ngModel)]="productService.selectedProduct.listId"/>
                 <mat-form-field>
                     <input matInput type="text" placeholder="Producto" name="name" #name="ngModel" [(ngModel)]="productService.selectedProduct.name">
                 </mat-form-field>
@@ -13,9 +14,10 @@
                 <button mat-raised-button matSuffix mat-icon-button >
                     <mat-icon>save</mat-icon>
                 </button>
+                
             </form>
         </div>
-        <button (click)="getProducts()">All</button>
+        
     </mat-card-header>
     
     <mat-card-content *ngFor="let product of productos" >

@@ -1,6 +1,5 @@
 <main>
-    <button (click)="getLists()">Todas</button>
-
+    <button (click)="getLists()">todas</button>
     <div>
         <form #keyForm="ngForm" >
             <mat-form-field>
@@ -37,20 +36,21 @@
             <mat-expansion-panel *ngFor="let list of listas">
                 <mat-expansion-panel-header >
                     
-                    <mat-panel-title>
-                        {{list.name}}
+                    <mat-panel-title >
+                        {{list.name}} - &nbsp;&nbsp;<b>{{list.key}}</b>
+                        
                     </mat-panel-title>
                     <div>
                         <button mat-button matSuffix mat-icon-button (click)="editList(list)">
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-button matSuffix mat-icon-button (click)="deleteList(list._id)">
+                        <button mat-button matSuffix mat-icon-button (click)="deleteList(list)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>
                 </mat-expansion-panel-header>
                 
-                <app-product [listId]="list._id"></app-product>
+                <app-product [listId]="list._id" ></app-product>
                 
 
 

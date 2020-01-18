@@ -29,8 +29,6 @@ export class ListService {
   }
 
   putList(list: List){
-    console.log("list service: "+list);
-    
     return this.http.put(this.URL_API + `/${list._id}`, list);
   }
 

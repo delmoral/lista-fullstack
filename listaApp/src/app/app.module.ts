@@ -19,6 +19,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
 import {MatSnackBarModule} from '@angular/material/snack-bar'; 
 
+
 import { FormsModule } from '@angular/forms';
 
 @NgModule({

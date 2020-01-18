@@ -3,7 +3,7 @@ import { Product } from './product';
 export class List {
     _id: string;
     name: string;
-    products: Product[];
+    products: String[];
     key: string;
 
     constructor(_id = "", name ="", products = [], key = "") {
